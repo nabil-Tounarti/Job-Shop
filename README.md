@@ -108,57 +108,106 @@ INITIALISATION:
 
 # Algo:
 Pour i=1 à n*m faire :
+
          j=V[i]
+         
          C[j]=C[j]+1
+         
          Si ( C[j] > 1) alors
+         
            |       m=ST[j][C[j]-1]
+           
            |       Si ( m+P[i][C[j]-1] > ST[j][C[j]] ) alors 
+           
            |         |            ST[j][C[j]=m+P[i][C[j]-1] 
+           
            |       fsi
+           
          fsi
+         
          mach =m[j][C[j]]
+         
          Si pm[mach] =! (0,0) alors 
+         
           |         (p,q) = pm[mach]
+          
           |         date = ST[p][q]
+          
           |        Si (date + P[p][q] > ST[j][C[j]] ) alors
+          
           |         |          ST[j][C[j]] = date + P[p][q]
+          
           |        fsi
+          
          fsi
+         
          pm[mach]=(j,C[j])
+         
 Fpour
+
 
 # b) la procédure recherche_locale():
 
+
 # Algo:
 
+
 évaluer(ST,pere,cout)
+
 Stop =  0
+
 i=*
+
 j=pere(*)
+
 c=0
+
 Tant-que (Stop == 0) faire
+
           c++
+          
           Si (machine de i = machine de j ) alors 
+          
            |        chercher position de i (Droitr à gauche) 
+           
            |        chercher position de j (Droitr à gauche) 
+           
            |         V'= permutation(V,pos i ,pos j)
+           
            |        évaluer(V')
+           
            |         Si (cout de V'  >  cout de V ) alors 
+           
            |          |          i=j
+           
            |          |           j=pére(j)
+           
            |         Sinon
+           
            |          |           V=V'
+           
            |          |            i=*
+           
            |          |            j=pere(i)
+           
            |         fsi
+           
          Sinon
+         
            |          i=j
+           
            |          j=pere(i)
+           
           fsi
+          
           Si ( i ==0) ou (c = nmaxit) alors
+          
            |            Stop =1
+           
           fsi
+          
 Fintq
+
                    
 
 
@@ -174,30 +223,56 @@ nb_max est le nombre maximal des élévations
 
 recherche_local(s,ins,50)
 
+
 pour i de 1 à nb_max faire:
+
     |       tab_s[1]=s
+    
     |       pour j de 2 à 10 faire:
+    
     |            |          s1=s
+    
     |            |       a=random()%50
+    
     |            |          b=random()%50
+    
     |            |          permutation(s1,ins,50,s)
+    
     |            |         recherche_local(s1,ins,50)
+    
     |            |         si tab_h[s1] == 0 test > test_max
+    
     |            |            |                    tab_h[s1]=1
+    
     |            |            |                   tab_s[j]=s1
+    
     |            |            |                  test=0
+    
     |            |         sinon
+    
     |            |             |                   j--
+    
     |            |             |                  test++
+    
     |            |           fsi
+    
     |          fpour
+    
     |          j_max=1
+    
     |          pour i de 2 à 10 faire
+    
     |           |       Si le cout de tab_s[i] < cout de tab_s[j_max] alors
+    
     |           |        |                 j_max=i
+    
     |           |       fsi
+    
     |          fpour
+    
     |          s=tab_s[j_max]
+    
 fpour
+
 
 
